@@ -36,7 +36,7 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "@blueprintjs/table/lib/css/table.css";
 import "@blueprintjs/core/lib/less/variables.less";
 
-import "mosaicrwm/mosaicrwm.css";
+import "mosaicrwm/style.css";
 import { KeyedCollection } from './types';
 
 import "./App.less";
@@ -51,7 +51,8 @@ ELEMENT_MAP.add(
   "JOSZKO",
   <div className="example-window" style={{ height: "100%" }}>
     <Callout icon="chat" intent="success" title="Visually important content" style={{ height: "100%" }}>
-      The component is a simple wrapper around the CSS API that provides props for modifiers and optional title element. Any additional HTML props will be spread to the rendered{" "}
+      The component is a simple wrapper around the CSS API that provides props for
+      modifiers and optional title element. Any additional HTML props will be spread to the rendered{" "}
       <Code>{"<div>"}</Code> element.
     </Callout>
   </div>
