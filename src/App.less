@@ -16,13 +16,27 @@
  */
 @import (reference) '~@blueprintjs/core/lib/less/variables';
 
-html, body, #app, .react-mosaic-app {
+html,
+body,
+#app,
+.react-mosaic-app {
   margin: 0;
   height: 100%;
   width: 100%;
 }
 
 .react-mosaic-app {
+  .sliderro {
+    .bp3-label {
+      color: black;
+      font-weight: 500;
+    }
+    .bp3-slider-axis {
+      .bp3-slider-label {
+        color: black;
+      }
+    }
+  }
   .actions-label {
     margin-right: 10px;
   }

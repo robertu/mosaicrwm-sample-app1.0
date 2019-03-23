@@ -29,6 +29,7 @@ import OctaHedronInStars from "./components/OctaHedronInStars";
 import GreenCube from "./components/GreenCube";
 import DraggableCubes from "./components/DraggableCubes";
 import PanelStackContainer from "./components/PanelStackContainer";
+import Morpheus from "./components/Morpheus";
 import Form from "./components/Form";
 
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -131,6 +132,10 @@ class App extends PureComponent<{}, ExampleAppState> {
       }
       case "GreenCube": {
         ELEMENT_MAP.add(created, <GreenCube />);
+        break;
+      }
+      case "Morpheus": {
+        ELEMENT_MAP.add(created, <Morpheus />);
         break;
       }
       case "DraggableCubesA": {

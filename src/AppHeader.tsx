@@ -1,23 +1,8 @@
 import React, { MouseEvent } from "react";
-import {
-  Classes,
-  Icon,
-  Menu,
-  MenuDivider,
-  MenuItem,
-  Popover,
-  Position,
-  Alignment,
-  Button,
-  Navbar,
-  NavbarDivider,
-  NavbarGroup,
-  NavbarHeading
-} from "@blueprintjs/core";
+import { Classes, Icon, Menu, MenuDivider, MenuItem, Popover, Position, Alignment, Button, Navbar, NavbarDivider, NavbarGroup, NavbarHeading } from "@blueprintjs/core";
 
-import { CustomSvg } from './CustomSvg';
+import { CustomSvg } from "./CustomSvg";
 const { version } = require("../package.json");
-
 
 type ThemedIconProps = {
   light_theme: boolean;
@@ -30,35 +15,16 @@ type ThemedHeaderProps = {
   addToTopRight: (name: string) => (event: MouseEvent) => void;
 };
 
+const CustomLogo = ({ light_theme }: ThemedIconProps) => <CustomSvg width={80} height={32} light_theme={light_theme} />;
 
-
-const CustomLogo = ({ light_theme }: ThemedIconProps) => (
-  <CustomSvg width={80} height={32} light_theme={light_theme} />
-);
-
-const AppHeader = ({
-  light_theme,
-  themeSwitch,
-  autoArrange,
-  addToTopRight
-}: ThemedHeaderProps) => (
+const AppHeader = ({ light_theme, themeSwitch, autoArrange, addToTopRight }: ThemedHeaderProps) => (
   <Navbar className={light_theme ? undefined : Classes.DARK}>
     <NavbarGroup align={Alignment.LEFT}>
       <Popover
         content={
           <Menu>
-            <MenuItem
-              icon="grid-view"
-              text="Rearrange windows"
-              onClick={autoArrange}
-            />
-            <MenuItem
-              icon="contrast"
-              text={
-                light_theme ? "Switch to dark theme" : "Switch to light theme"
-              }
-              onClick={themeSwitch}
-            />
+            <MenuItem icon="grid-view" text="Rearrange windows" onClick={autoArrange} />
+            <MenuItem icon="contrast" text={light_theme ? "Switch to dark theme" : "Switch to light theme"} onClick={themeSwitch} />
             <MenuDivider />
             <MenuItem icon="new-text-box" text="New text 2" />
             <MenuItem icon="new-object" text="New object" />
@@ -66,76 +32,28 @@ const AppHeader = ({
             <MenuDivider />
             <MenuItem icon="cog" text="Settings..." />
             <MenuDivider />
-            <MenuItem
-              icon="cross"
-              labelElement={<Icon icon="share" />}
-              text="Logout"
-            />
+            <MenuItem icon="cross" labelElement={<Icon icon="share" />} text="Logout" />
           </Menu>
         }
         position={Position.BOTTOM_LEFT}
-        minimal
-      >
-        <Button
-          className={Classes.MINIMAL}
-          icon={<CustomLogo light_theme={light_theme} />}
-          text={null}
-        />
+        minimal>
+        <Button className={Classes.MINIMAL} icon={<CustomLogo light_theme={light_theme} />} text={null} />
       </Popover>
       <NavbarDivider />
       <Popover
         content={
           <Menu>
-            <MenuItem
-              icon="applications"
-              text="New dummy window"
-              onClick={addToTopRight("dummy")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <Callout>"
-              onClick={addToTopRight("callout")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <Tabs>"
-              onClick={addToTopRight("tabs")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <Table>"
-              onClick={addToTopRight("table")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <Test-Table>"
-              onClick={addToTopRight("test-table")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <OctaHedronInStars>"
-              onClick={addToTopRight("OctaHedronInStars")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <GreenCube>"
-              onClick={addToTopRight("GreenCube")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <DraggableCubes A>"
-              onClick={addToTopRight("DraggableCubesA")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <DraggableCubes B>"
-              onClick={addToTopRight("DraggableCubesB")}
-            />
-            <MenuItem
-              icon="applications"
-              text="New <PanelStackContainer>"
-              onClick={addToTopRight("PanelStackContainer")}
-            />
+            <MenuItem icon="applications" text="New dummy window" onClick={addToTopRight("dummy")} />
+            <MenuItem icon="applications" text="New <Callout>" onClick={addToTopRight("callout")} />
+            <MenuItem icon="applications" text="New <Tabs>" onClick={addToTopRight("tabs")} />
+            <MenuItem icon="applications" text="New <Table>" onClick={addToTopRight("table")} />
+            <MenuItem icon="applications" text="New <Test-Table>" onClick={addToTopRight("test-table")} />
+            <MenuItem icon="applications" text="New <OctaHedronInStars>" onClick={addToTopRight("OctaHedronInStars")} />
+            <MenuItem icon="applications" text="New <Morpheus>" onClick={addToTopRight("Morpheus")} />
+            <MenuItem icon="applications" text="New <GreenCube>" onClick={addToTopRight("GreenCube")} />
+            <MenuItem icon="applications" text="New <DraggableCubes A>" onClick={addToTopRight("DraggableCubesA")} />
+            <MenuItem icon="applications" text="New <DraggableCubes B>" onClick={addToTopRight("DraggableCubesB")} />
+            <MenuItem icon="applications" text="New <PanelStackContainer>" onClick={addToTopRight("PanelStackContainer")} />
             <MenuItem icon="map" text="Map" />
             <MenuItem icon="th" text="Table" shouldDismissPopover={false} />
             <MenuItem icon="zoom-to-fit" text="Nucleus" disabled={true} />
@@ -147,8 +65,7 @@ const AppHeader = ({
           </Menu>
         }
         minimal
-        position={Position.BOTTOM_LEFT}
-      >
+        position={Position.BOTTOM_LEFT}>
         <Button className={Classes.MINIMAL} icon="document" text="File" />
       </Popover>
       <Popover
@@ -166,8 +83,7 @@ const AppHeader = ({
           </Menu>
         }
         minimal
-        position={Position.BOTTOM_LEFT}
-      >
+        position={Position.BOTTOM_LEFT}>
         <Button className={Classes.MINIMAL} icon="edit" text="Edit" />
       </Popover>
     </NavbarGroup>
@@ -180,24 +96,13 @@ const AppHeader = ({
           <Menu>
             <MenuItem icon="new-text-box" text="New text" />
             <MenuItem icon="new-object" text="New object" />
-            <MenuItem
-              icon="contrast"
-              text={
-                light_theme ? "Switch to dark theme" : "Switch to light theme"
-              }
-              onClick={themeSwitch}
-            />
+            <MenuItem icon="contrast" text={light_theme ? "Switch to dark theme" : "Switch to light theme"} onClick={themeSwitch} />
             <MenuDivider />
-            <MenuItem
-              icon="cog"
-              labelElement={<Icon icon="share" />}
-              text="Settings..."
-            />
+            <MenuItem icon="cog" labelElement={<Icon icon="share" />} text="Settings..." />
           </Menu>
         }
         position={Position.BOTTOM_RIGHT}
-        minimal
-      >
+        minimal>
         <Button className={Classes.MINIMAL} icon="user" text="User" />
       </Popover>
     </NavbarGroup>
