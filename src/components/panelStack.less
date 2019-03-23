@@ -1,0 +1,32 @@
+.panel-container {
+  width: 100%;
+  height: 100%
+}
+
+.table-container {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-row {
+  // margin: auto;
+  width: 75%;
+  flex-shrink: 0;
+  display: flex;
+  // width: 100%;
+  margin-bottom: .5rem;
+  > .fg:not(:last-child),
+    .bp3-control-group:not(:last-child) {
+    margin-right: .5rem;
+  }
+}
