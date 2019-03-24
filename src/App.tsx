@@ -31,6 +31,7 @@ import DraggableCubes from "./components/DraggableCubes";
 import PanelStackContainer from "./components/PanelStackContainer";
 import Morpheus from "./components/Morpheus";
 import Form from "./components/Form";
+import Map from "./components/Map";
 
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -38,7 +39,7 @@ import "@blueprintjs/table/lib/css/table.css";
 import "@blueprintjs/core/lib/less/variables.less";
 
 import "mosaicrwm/style.css";
-import { KeyedCollection } from './types';
+import { KeyedCollection } from "./types";
 
 import "./App.less";
 
@@ -51,18 +52,27 @@ const ELEMENT_MAP = new KeyedCollection<React.ReactElement>();
 ELEMENT_MAP.add(
   "JOSZKO",
   <div className="example-window" style={{ height: "100%" }}>
-    <Callout icon="chat" intent="success" title="Visually important content" style={{ height: "100%" }}>
-      The component is a simple wrapper around the CSS API that provides props for
-      modifiers and optional title element. Any additional HTML props will be spread to the rendered{" "}
-      <Code>{"<div>"}</Code> element.
+    <Callout
+      icon="chat"
+      intent="success"
+      title="Visually important content"
+      style={{ height: "100%" }}
+    >
+      The component is a simple wrapper around the CSS API that provides props
+      for modifiers and optional title element. Any additional HTML props will
+      be spread to the rendered <Code>{"<div>"}</Code> element.
     </Callout>
   </div>
 );
 
-ELEMENT_MAP.add("FISZER", <PanelStackContainer />);
-ELEMENT_MAP.add("BABOK", <Form />);
-ELEMENT_MAP.add("TABLE", <TabelaDynamicznie />);
-
+ELEMENT_MAP.add("Stack Panel", <PanelStackContainer />);
+ELEMENT_MAP.add("Form", <Form />);
+ELEMENT_MAP.add("GreenCube 1", <GreenCube />);
+ELEMENT_MAP.add("GreenCube 2", <GreenCube />);
+ELEMENT_MAP.add("GreenCube 3", <GreenCube />);
+ELEMENT_MAP.add("Dynamic Table", <TabelaDynamicznie />);
+ELEMENT_MAP.add("GoogleMap", <Map />);
+ELEMENT_MAP.add("Morpheus", <Morpheus />);
 
 export interface ExampleAppState {
   currentNode: MosaicNode<string> | null;
@@ -73,17 +83,16 @@ class App extends PureComponent<{}, ExampleAppState> {
   state: ExampleAppState = {
     currentNode: {
       direction: "row",
-      first: "JOSZKO",
+      first: {
+        direction: "column",
+        first: "Morpheus",
+        second: "GreenCube 1"
+      },
       second: {
         direction: "column",
-        first: "FISZER",
-        second: {
-          direction: "column",
-          first: "TABLE",
-          second: "BABOK"
-        }
-      },
-      splitPercentage: 20
+        first: "GreenCube 2",
+        second: "GreenCube 3"
+      }
     },
     light_theme: true
   };
@@ -103,8 +112,9 @@ class App extends PureComponent<{}, ExampleAppState> {
         ELEMENT_MAP.add(
           created,
           <Callout icon="chat" title="Visually important content">
-            The component is a simple wrapper around the CSS API that provides props for modifiers and optional title element. Any additional HTML props will be spread to the
-            rendered <Code>{"<div>"}</Code> element.
+            The component is a simple wrapper around the CSS API that provides
+            props for modifiers and optional title element. Any additional HTML
+            props will be spread to the rendered <Code>{"<div>"}</Code> element.
           </Callout>
         );
         break;
@@ -116,6 +126,10 @@ class App extends PureComponent<{}, ExampleAppState> {
             <ExampleTabs />
           </div>
         );
+        break;
+      }
+      case "GoogleMap": {
+        ELEMENT_MAP.add(created, <Map />);
         break;
       }
       case "table": {
@@ -143,7 +157,10 @@ class App extends PureComponent<{}, ExampleAppState> {
         break;
       }
       case "DraggableCubesB": {
-        ELEMENT_MAP.add(created, <DraggableCubes count={200} rotation={10} rescale={4} />);
+        ELEMENT_MAP.add(
+          created,
+          <DraggableCubes count={200} rotation={10} rescale={4} />
+        );
         break;
       }
       case "PanelStackContainer": {
@@ -179,9 +196,16 @@ class App extends PureComponent<{}, ExampleAppState> {
     let { currentNode } = this.state;
     if (currentNode) {
       const path = getPathToCorner(currentNode, Corner.TOP_RIGHT);
-      const parent = getNodeAtPath(currentNode, dropRight(path)) as MosaicParent<string>;
-      const destination = getNodeAtPath(currentNode, path) as MosaicNode<string>;
-      const direction: MosaicDirection = parent ? getOtherDirection(parent.direction) : "row";
+      const parent = getNodeAtPath(
+        currentNode,
+        dropRight(path)
+      ) as MosaicParent<string>;
+      const destination = getNodeAtPath(currentNode, path) as MosaicNode<
+        string
+      >;
+      const direction: MosaicDirection = parent
+        ? getOtherDirection(parent.direction)
+        : "row";
 
       let first;
       let second;
@@ -214,29 +238,49 @@ class App extends PureComponent<{}, ExampleAppState> {
 
   render() {
     return (
-      <div className={classNames("react-mosaic-app", "mosaic-blueprint-theme", this.state.light_theme ? null : Classes.DARK)}>
-        <AppHeader light_theme={this.state.light_theme} autoArrange={this.autoArrange} themeSwitch={this.themeSwitch} addToTopRight={this.addToTopRight} />
+      <div
+        className={classNames(
+          "react-mosaic-app",
+          "mosaic-blueprint-theme",
+          this.state.light_theme ? null : Classes.DARK
+        )}
+      >
+        <AppHeader
+          light_theme={this.state.light_theme}
+          autoArrange={this.autoArrange}
+          themeSwitch={this.themeSwitch}
+          addToTopRight={this.addToTopRight}
+        />
         <Mosaic<string>
           renderTile={(name, path) => (
             <MosaicWindow<string>
               additionalControls={
-                name === "dummy2" ? <Button minimal={true} icon="airplane" /> : []
+                name === "dummy2" ? (
+                  <Button minimal={true} icon="airplane" />
+                ) : (
+                  []
+                )
               }
               title={name}
               createNode={this.createNode("dummy")}
               path={path}
               onDragStart={() => console.log("MosaicWindow.onDragStart")}
-              onDragEnd={(type) => console.log("MosaicWindow.onDragEnd", type)}
+              onDragEnd={type => console.log("MosaicWindow.onDragEnd", type)}
               renderToolbar={null}
             >
               {ELEMENT_MAP.item(name)}
             </MosaicWindow>
           )}
-          zeroStateView={<MosaicZeroState createNode={this.createNode("dummy")} />}
+          zeroStateView={
+            <MosaicZeroState createNode={this.createNode("dummy")} />
+          }
           value={this.state.currentNode}
           onChange={this.onChange}
           onRelease={this.onRelease}
-          className={classNames("mosaic-blueprint-theme", this.state.light_theme ? null : Classes.DARK)}
+          className={classNames(
+            "mosaic-blueprint-theme",
+            this.state.light_theme ? null : Classes.DARK
+          )}
         />
       </div>
     );

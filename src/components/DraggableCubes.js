@@ -1,18 +1,9 @@
 import React from "react";
 import * as THREE from "three";
 
-import { TrackballControls, DragControls } from 'threejs-ext';
-import { ResizeSensor } from "../helpers";
+import { TrackballControls, DragControls } from "threejs-ext";
 
 class DraggableCubes extends React.Component {
-  /**
-   * Constructor
-   */
-  constructor(props) {
-    super(props);
-    this.updateDimensions = this.updateDimensions.bind(this);
-    this.myRef = React.createRef();
-  }
 
   /**
    * Rendering
@@ -21,7 +12,7 @@ class DraggableCubes extends React.Component {
     return (
       <div
         style={{ width: "100%", height: "100%" }}
-        ref={(r) => this.myRef = r}
+        ref={c => (this.canvas = c)}
       />
     );
   }
@@ -33,16 +24,17 @@ class DraggableCubes extends React.Component {
     const { rotation, rescale, count } = this.props;
     this.objects = [];
 
-    window.addEventListener("resize", this.updateDimensions);
+    this.width = this.canvas.clientWidth;
+    this.height = this.canvas.clientHeight;
 
-    this.width = this.myRef.clientWidth;
-    this.height = this.myRef.clientHeight;
-
-    new ResizeSensor(this.myRef, this.updateDimensions);
-
-    this.container = document.createElement('div');
-    this.myRef.appendChild(this.container);
-    this.camera = new THREE.PerspectiveCamera(70, this.width / this.height, 1, 5000);
+    this.container = document.createElement("div");
+    this.canvas.appendChild(this.container);
+    this.camera = new THREE.PerspectiveCamera(
+      70,
+      this.width / this.height,
+      1,
+      5000
+    );
     this.camera.position.z = 1000;
     this.controls = new TrackballControls(this.camera);
     this.controls.rotateSpeed = 1.0;
@@ -52,8 +44,14 @@ class DraggableCubes extends React.Component {
     this.controls.noPan = false;
     this.controls.staticMoving = true;
     this.controls.dynamicDampingFactor = 0.3;
-    this.container.addEventListener('mouseenter', () => this.controls.enabled = true);
-    this.container.addEventListener('mouseout', () => this.controls.enabled = false);
+    this.container.addEventListener(
+      "mouseenter",
+      () => (this.controls.enabled = true)
+    );
+    this.container.addEventListener(
+      "mouseout",
+      () => (this.controls.enabled = false)
+    );
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xf0f0f0);
     this.scene.add(new THREE.AmbientLight(0x505050));
@@ -67,8 +65,11 @@ class DraggableCubes extends React.Component {
     this.light.shadow.mapSize.height = 1024;
     this.scene.add(this.light);
     this.geometry = new THREE.BoxBufferGeometry(40, 40, 40);
-    for (let i = 0; i < count; i +=1 ) {
-      const object = new THREE.Mesh(this.geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+    for (let i = 0; i < count; i += 1) {
+      const object = new THREE.Mesh(
+        this.geometry,
+        new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff })
+      );
       object.position.x = Math.random() * 1000 - 500;
       object.position.y = Math.random() * 600 - 300;
       object.position.z = Math.random() * 800 - 400;
@@ -89,49 +90,37 @@ class DraggableCubes extends React.Component {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.container.appendChild(this.renderer.domElement);
-    this.dragControls = new DragControls(this.objects, this.camera, this.renderer.domElement);
-    this.dragControls.addEventListener('dragstart', () => this.controls.enabled = false);
-    this.dragControls.addEventListener('dragend', () => this.controls.enabled = true);
-    this.updateDimensions();
+    this.dragControls = new DragControls(
+      this.objects,
+      this.camera,
+      this.renderer.domElement
+    );
+    this.dragControls.addEventListener(
+      "dragstart",
+      () => (this.controls.enabled = false)
+    );
+    this.dragControls.addEventListener(
+      "dragend",
+      () => (this.controls.enabled = true)
+    );
     this.animate();
   }
 
-  animate () {
+  animate() {
     requestAnimationFrame(this.animate.bind(this));
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
 
-  updateDimensions() {
-    if (this.myRef !== null) {
-      this.width = this.myRef.clientWidth;
-      this.height = this.myRef.clientHeight;
-    }
-
-    if (this.renderer !== undefined) {
-      this.camera.aspect = this.width / this.height;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(this.width, this.height);
-    }
-  }
-
   /**
-   * Invalidation handler, updating layout
+   * Resize operation handler, updating dimensions.
    */
-  componentWillUpdate() {
-    const width = this.myRef.clientWidth;
-    const height = this.myRef.clientHeight;
-
-    this.camera.aspect = width / height;
+  componentDidUpdate() {
+    this.width = this.canvas.clientWidth;
+    this.height = this.canvas.clientHeight;
+    this.renderer.setSize(this.width, this.height);
+    this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(width, height);
-  }
-
-  /**
-   * Dipose
-   */
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
   }
 }
 

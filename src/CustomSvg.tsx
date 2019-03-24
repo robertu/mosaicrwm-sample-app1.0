@@ -22,9 +22,9 @@ export const CustomSvg = ({ light_theme, width, height }: SvgProps) => {
       <g
         id="Page-1"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       >
         <g id="BASH_logo-transparent-bg-bw">
           <g id="Group-3" transform="translate(0.000000, -0.290000)">
