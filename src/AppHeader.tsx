@@ -84,68 +84,44 @@ const AppHeader = ({
         content={
           <Menu>
             <MenuItem
-              icon="applications"
+              icon={"document"}
               text="Dummy window"
               onClick={addToTopRight("dummy")}
             />
-            <MenuItem icon="applications" text="Components">
-              <MenuItem
-                icon="applications"
-                text="Callout component"
-                onClick={addToTopRight("callout")}
-              />
-              <MenuItem
-                icon="applications"
-                text="Tabs component"
-                onClick={addToTopRight("tabs")}
-              />
-              <MenuItem
-                icon="applications"
-                text="Simple Table"
-                onClick={addToTopRight("table")}
-              />
-              <MenuItem
-                icon="applications"
-                text="Test Table"
-                onClick={addToTopRight("test-table")}
-              />
-            </MenuItem>
-
             <MenuItem
-              icon="applications"
-              text="OctaHedron in Stars"
-              onClick={addToTopRight("OctaHedronInStars")}
+              icon={"application"}
+              text="Callout component"
+              onClick={addToTopRight("callout")}
             />
             <MenuItem
-              icon="applications"
-              text="Morpheus"
-              onClick={addToTopRight("Morpheus")}
+              icon={"tag"}
+              text="Tabs component"
+              onClick={addToTopRight("tabs")}
             />
             <MenuItem
-              icon="applications"
-              text="GreenCube"
-              onClick={addToTopRight("GreenCube")}
+              icon={"th"}
+              text="Simple Table"
+              onClick={addToTopRight("table")}
             />
             <MenuItem
-              icon="applications"
-              text="DraggableCubes A"
-              onClick={addToTopRight("DraggableCubesA")}
+              icon={"th"}
+              text="Test Table"
+              onClick={addToTopRight("test-table")}
             />
             <MenuItem
-              icon="applications"
-              text="DraggableCubes B"
-              onClick={addToTopRight("DraggableCubesB")}
-            />
-            <MenuItem
-              icon="applications"
-              text="PanelStackContainer"
+              icon={"th"}
+              text="Stack Panel"
               onClick={addToTopRight("PanelStackContainer")}
             />
+            <MenuDivider />
+
             <MenuItem
               icon="map"
               text="GoogleMap"
               onClick={addToTopRight("GoogleMap")}
             />
+            <MenuDivider />
+
             <MenuItem
               icon="th"
               text="Test (no menu close possible)"
@@ -156,17 +132,55 @@ const AppHeader = ({
               text="Nucleus (disabled)"
               disabled={true}
             />
-            <MenuDivider />
-            <MenuItem icon="cog" text="Settings...">
-              <MenuItem icon="add" text="Add new application" disabled={true} />
-              <MenuItem icon="remove" text="Remove application" />
-            </MenuItem>
           </Menu>
         }
         minimal
         position={Position.BOTTOM_LEFT}
       >
-        <Button className={Classes.MINIMAL} icon="document" text="File" />
+        <Button
+          className={Classes.MINIMAL}
+          icon="applications"
+          text="Components"
+        />
+      </Popover>
+      <Popover
+        content={
+          <Menu>
+            <MenuItem
+              icon="application"
+              text="OctaHedron in Stars"
+              onClick={addToTopRight("OctaHedronInStars")}
+            />
+            <MenuItem
+              icon={"layout-balloon"}
+              text="Morpheus"
+              onClick={addToTopRight("Morpheus")}
+            />
+            <MenuItem
+              icon={"properties"}
+              text="GreenCube"
+              onClick={addToTopRight("GreenCube")}
+            />
+            <MenuItem
+              icon={"gantt-chart"}
+              text="DraggableCubes A"
+              onClick={addToTopRight("DraggableCubesA")}
+            />
+            <MenuItem
+              icon={"image-rotate-left"}
+              text="DraggableCubes B"
+              onClick={addToTopRight("DraggableCubesB")}
+            />
+          </Menu>
+        }
+        minimal
+        position={Position.BOTTOM_LEFT}
+      >
+        <Button
+          className={Classes.MINIMAL}
+          icon={"polygon-filter"}
+          text="WebGL"
+        />
       </Popover>
       <Popover
         content={
