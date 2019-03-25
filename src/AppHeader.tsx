@@ -1,196 +1,89 @@
-import React, { MouseEvent } from "react";
 import {
+  Alignment,
+  Button,
   Classes,
   Icon,
   Menu,
   MenuDivider,
   MenuItem,
-  Popover,
-  Position,
-  Alignment,
-  Button,
   Navbar,
   NavbarDivider,
   NavbarGroup,
-  NavbarHeading
-} from "@blueprintjs/core";
+  NavbarHeading,
+  Popover,
+  Position,
+} from '@blueprintjs/core';
+import { AppHeaderLogo } from './AppHeaderLogo';
+import React from 'react';
+// import React, { MouseEvent } from 'react';
 
-import { CustomSvg } from "./CustomSvg";
-const { version } = require("../package.json");
+// tslint:disable-next-line:no-var-requires
+const { version } = require('../package.json');
 
-type ThemedIconProps = {
-  light_theme: boolean;
-};
+interface ThemedIconProps {
+  lightTheme: boolean;
+}
 
-type ThemedHeaderProps = {
-  light_theme: boolean;
+interface ThemedHeaderProps {
+  lightTheme: boolean;
   themeSwitch: () => void;
-  autoArrange: () => void;
-  addToTopRight: (name: string) => (event: MouseEvent) => void;
-};
+  nodeCreator: (name: string) => void;
+  mosaic: any;
+  // addToTopRight: (name: string) => (event: MouseEvent) => void;
+}
 
-const CustomLogo = ({ light_theme }: ThemedIconProps) => (
-  <CustomSvg width={80} height={32} light_theme={light_theme} />
-);
+const CustomLogo = ({ lightTheme }: ThemedIconProps) => <AppHeaderLogo width={80} height={32} lightTheme={lightTheme} />;
 
-const AppHeader = ({
-  light_theme,
-  themeSwitch,
-  autoArrange,
-  addToTopRight
-}: ThemedHeaderProps) => (
-  <Navbar className={light_theme ? undefined : Classes.DARK}>
+export const AppHeader = ({ lightTheme, themeSwitch, mosaic, nodeCreator }: ThemedHeaderProps) => (
+  <Navbar className={lightTheme ? undefined : Classes.DARK}>
     <NavbarGroup align={Alignment.LEFT}>
       <Popover
         content={
           <Menu>
-            <MenuItem
-              icon="grid-view"
-              text="Rearrange windows"
-              onClick={autoArrange}
-            />
-            <MenuItem
-              icon="contrast"
-              text={
-                light_theme ? "Switch to dark theme" : "Switch to light theme"
-              }
-              onClick={themeSwitch}
-            />
+            <MenuItem icon="grid-view" text="Rearrange windows" onClick={() => mosaic.autoArrange()} />
+            <MenuItem icon="contrast" text={lightTheme ? 'Switch to dark theme' : 'Switch to light theme'} onClick={themeSwitch} />
             <MenuDivider />
-            <MenuItem icon="new-text-box" text="New text 2" />
+            <MenuItem icon="new-text-box" text="New text" />
             <MenuItem icon="new-object" text="New object" />
             <MenuItem icon="new-link" text="New link" />
             <MenuDivider />
             <MenuItem icon="cog" text="Settings..." />
             <MenuDivider />
-            <MenuItem
-              icon="cross"
-              labelElement={<Icon icon="share" />}
-              text="Logout"
-            />
+            <MenuItem icon="cross" labelElement={<Icon icon="share" />} text="Logout" />
           </Menu>
         }
         position={Position.BOTTOM_LEFT}
-        minimal
+        minimal={true}
       >
-        <Button
-          className={Classes.MINIMAL}
-          icon={<CustomLogo light_theme={light_theme} />}
-          text={null}
-        />
+        <Button className={Classes.MINIMAL} icon={<CustomLogo lightTheme={lightTheme} />} text={null} />
       </Popover>
       <NavbarDivider />
       <Popover
         content={
           <Menu>
-            <MenuItem
-              icon={"document"}
-              text="Dummy window"
-              onClick={addToTopRight("dummy")}
-            />
-            <MenuItem
-              icon={"application"}
-              text="Callout component"
-              onClick={addToTopRight("callout")}
-            />
-            <MenuItem
-              icon={"tag"}
-              text="Tabs component"
-              onClick={addToTopRight("tabs")}
-            />
-            <MenuItem
-              icon={"th"}
-              text="Simple Table"
-              onClick={addToTopRight("table")}
-            />
-            <MenuItem
-              icon={"th"}
-              text="Test Table"
-              onClick={addToTopRight("test-table")}
-            />
-            <MenuItem
-              icon={"th"}
-              text="Stack Panel"
-              onClick={addToTopRight("PanelStackContainer")}
-            />
-            <MenuDivider />
-
-            <MenuItem
-              icon="map"
-              text="GoogleMap"
-              onClick={addToTopRight("GoogleMap")}
-            />
-            <MenuDivider />
-
-            <MenuItem
-              icon="th"
-              text="Test (no menu close possible)"
-              shouldDismissPopover={false}
-            />
-            <MenuItem
-              icon="zoom-to-fit"
-              text="Nucleus (disabled)"
-              disabled={true}
-            />
+            <MenuItem icon="application" text="New dummy window" onClick={() => nodeCreator('dummy')} />
+            <MenuItem icon="application" text="Callout" onClick={() => nodeCreator('callout')} />
+            <MenuItem icon="application" text="Tabs" onClick={() => nodeCreator('tabs')} />
+            <MenuItem icon="th" text="Table1" onClick={() => nodeCreator('table1')} />
+            <MenuItem icon="th" text="Table2" onClick={() => nodeCreator('table2')} />
+            <MenuItem icon="application" text="OctaHedronInStars" onClick={() => nodeCreator('OctaHedronInStars')} />
+            <MenuItem icon="application" text="GreenCube" onClick={() => nodeCreator('GreenCube')} />
+            <MenuItem icon="application" text="DraggableCubes A" onClick={() => nodeCreator('DraggableCubesA')} />
+            <MenuItem icon="application" text="DraggableCubes B" onClick={() => nodeCreator('DraggableCubesB')} />
+            <MenuItem icon="application" text="PanelStackContainer" onClick={() => nodeCreator('PanelStackContainer')} />
+            <MenuItem icon="map" text="Google Maps" onClick={() => nodeCreator('GoogleMaps')} />
           </Menu>
         }
-        minimal
+        minimal={true}
         position={Position.BOTTOM_LEFT}
       >
-        <Button
-          className={Classes.MINIMAL}
-          icon="applications"
-          text="Components"
-        />
+        <Button className={Classes.MINIMAL} icon="document" text="File" />
       </Popover>
       <Popover
         content={
           <Menu>
-            <MenuItem
-              icon="application"
-              text="OctaHedron in Stars"
-              onClick={addToTopRight("OctaHedronInStars")}
-            />
-            <MenuItem
-              icon={"layout-balloon"}
-              text="Morpheus"
-              onClick={addToTopRight("Morpheus")}
-            />
-            <MenuItem
-              icon={"properties"}
-              text="GreenCube"
-              onClick={addToTopRight("GreenCube")}
-            />
-            <MenuItem
-              icon={"gantt-chart"}
-              text="DraggableCubes A"
-              onClick={addToTopRight("DraggableCubesA")}
-            />
-            <MenuItem
-              icon={"image-rotate-left"}
-              text="DraggableCubes B"
-              onClick={addToTopRight("DraggableCubesB")}
-            />
-          </Menu>
-        }
-        minimal
-        position={Position.BOTTOM_LEFT}
-      >
-        <Button
-          className={Classes.MINIMAL}
-          icon={"polygon-filter"}
-          text="WebGL"
-        />
-      </Popover>
-      <Popover
-        content={
-          <Menu>
-            <MenuItem icon="graph" text="Graph (not yet)" />
-            <MenuItem
-              icon="map"
-              text="Map"
-              onClick={addToTopRight("GoogleMap")}
-            />
+            <MenuItem icon="graph" text="Graph" />
+            <MenuItem icon="map" text="Map" />
             <MenuItem icon="th" text="Table" shouldDismissPopover={false} />
             <MenuItem icon="zoom-to-fit" text="Nucleus" disabled={true} />
             <MenuDivider />
@@ -200,14 +93,14 @@ const AppHeader = ({
             </MenuItem>
           </Menu>
         }
-        minimal
+        minimal={true}
         position={Position.BOTTOM_LEFT}
       >
         <Button className={Classes.MINIMAL} icon="edit" text="Edit" />
       </Popover>
     </NavbarGroup>
     <NavbarGroup align={Alignment.RIGHT}>
-      <NavbarHeading>Sample Mosaic based application v{version}</NavbarHeading>
+      <NavbarHeading>Mosaic App v{version}</NavbarHeading>
       <NavbarDivider />
 
       <Popover
@@ -215,28 +108,16 @@ const AppHeader = ({
           <Menu>
             <MenuItem icon="new-text-box" text="New text" />
             <MenuItem icon="new-object" text="New object" />
-            <MenuItem
-              icon="contrast"
-              text={
-                light_theme ? "Switch to dark theme" : "Switch to light theme"
-              }
-              onClick={themeSwitch}
-            />
+            <MenuItem icon="contrast" text={lightTheme ? 'Switch to dark theme' : 'Switch to light theme'} onClick={themeSwitch} />
             <MenuDivider />
-            <MenuItem
-              icon="cog"
-              labelElement={<Icon icon="share" />}
-              text="Settings..."
-            />
+            <MenuItem icon="cog" labelElement={<Icon icon="share" />} text="Settings..." />
           </Menu>
         }
         position={Position.BOTTOM_RIGHT}
-        minimal
+        minimal={true}
       >
         <Button className={Classes.MINIMAL} icon="user" text="User" />
       </Popover>
     </NavbarGroup>
   </Navbar>
 );
-
-export default AppHeader;

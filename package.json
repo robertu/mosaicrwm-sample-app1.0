@@ -1,6 +1,6 @@
 {
   "name": "mosaicrwm-sample-app1",
-  "version": "0.1.0",
+  "version": "1.0.7",
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^3.14.1",
@@ -14,7 +14,7 @@
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.3",
     "less": "^3.9.0",
-    "mosaicrwm": "^1.0.5",
+    "mosaicrwm": "^1.0.7",
     "react": "^16.8.5",
     "react-app-rewire-less": "^2.1.3",
     "react-app-rewired": "^2.1.1",

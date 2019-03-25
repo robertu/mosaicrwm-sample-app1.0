@@ -8200,10 +8200,10 @@ mmd-parser@^1.0.3:
   resolved "https://registry.yarnpkg.com/mmd-parser/-/mmd-parser-1.0.3.tgz#7e4e475d076729e592c3e6bbe9298d7b841ed3ed"
   integrity sha1-fk5HXQdnKeWSw+a76SmNe4Qe0+0=
 
-mosaicrwm@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/mosaicrwm/-/mosaicrwm-1.0.5.tgz#262452556b7e2189fa16038978252d3bc0032211"
-  integrity sha512-JfA1tCeVRjIVPpAQlZ47qd2NvBrFdRRuC96ngrQkoWU2NUP6sJnJSHcPhM2RV2YcyT9uCk7L3+0yZ+SbCDrzww==
+mosaicrwm@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/mosaicrwm/-/mosaicrwm-1.0.7.tgz#5c450e8a1f3ebb64e59f9eb25e1e88eedb397ea9"
+  integrity sha512-WFHfJJWSSh92Y1byw2Z7oYyl/rLRelTt5kVd4TnwA0b6lwoOrf53O/csfY9sqf6AQ+iJ6CJMLl5KJeOoQu9auA==
   dependencies:
     classnames "^2.2.6"
     immutability-helper "~2.4.0"
