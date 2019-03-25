@@ -19,6 +19,7 @@ import Form from "./components/Form";
 import Map from "./components/Map";
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import '@blueprintjs/table/lib/css/table.css';
 import 'mosaicrwm/style.css';
 import './App.less';
 
