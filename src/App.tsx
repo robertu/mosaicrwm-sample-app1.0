@@ -16,6 +16,7 @@ import OctaHedronInStars from "./components/OctaHedronInStars";
 import DraggableCubes from "./components/DraggableCubes";
 import PanelStackContainer from "./components/PanelStackContainer";
 import Form from "./components/Form";
+import { Movie } from "./components/Movie";
 import Map from "./components/Map";
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
@@ -25,36 +26,11 @@ import './App.less';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
-
-
 const ELEMENT_MAP = new KeyedCollection<React.ReactElement>();
 
-ELEMENT_MAP.add(
-  "JOSZKO",
-  <div className="example-window" style={{ height: "100%" }}>
-    <Callout
-      icon="chat"
-      intent="success"
-      title="Visually important content"
-      style={{ height: "100%" }}
-    >
-      The component is a simple wrapper around the CSS API that provides props
-      for modifiers and optional title element. Any additional HTML props will
-      be spread to the rendered <Code>{"<div>"}</Code> element.
-    </Callout>
-  </div>
-);
-
-// ELEMENT_MAP.add("Stack Panel", <PanelStackContainer />);
-// ELEMENT_MAP.add("Form", <Form />);
-ELEMENT_MAP.add("GreenCube 1", <GreenCube />);
-ELEMENT_MAP.add("GreenCube 2", <GreenCube />);
-ELEMENT_MAP.add("GreenCube 3", <GreenCube />);
-// ELEMENT_MAP.add("Dynamic Table", <TabelaDynamicznie />);
-// ELEMENT_MAP.add("GoogleMap", <Map />);
 ELEMENT_MAP.add("Morpheus", <Morpheus />);
-
-
+ELEMENT_MAP.add("GreenCube", <GreenCube />);
+ELEMENT_MAP.add("How Linux is Built", <Movie />);
 
 
 export interface AppState {
@@ -64,6 +40,15 @@ export interface AppState {
 
 export class App extends React.Component<{}, AppState> {
   seqNumber: number = 0;
+  initialWindows: MosaicNode<string> = {
+    first: "Morpheus",
+    second: {
+      first: "GreenCube",
+      second: "How Linux is Built",
+      direction: "column"
+    },
+    direction: "row"
+  };
 
   constructor(props: Readonly<{}>) {
     super(props);
@@ -74,17 +59,17 @@ export class App extends React.Component<{}, AppState> {
   }
 
   private renderTile = (name: string, path: MosaicBranch[]): JSX.Element => {
-    console.log({name, path, cont: ELEMENT_MAP.contains(name)});
+    // console.log({name, path, cont: ELEMENT_MAP.contains(name)});
     return (
       <MosaicWindow<string>
         // toolbarControls={name === 'B' ? <Button minimal={true} icon="help" /> : true}
-        // statusbar={name !== 'C'}
+        statusbar={name === 'Morpheus'}
         name={name}
-        // statusbarControls={
-        //   <ControlGroup fill={true} vertical={false}>
-        //     <InputGroup disabled={true} placeholder="Find filters..." value={'Status Bar'} />
-        //   </ControlGroup>
-        // }
+        statusbarControls={
+          <ControlGroup fill={true} vertical={false}>
+            <InputGroup disabled={true} placeholder="Find filters..." value={'Status Bar'} />
+          </ControlGroup>
+        }
         title={name}
         path={path}
         // tslint:disable-next-line:no-console
@@ -123,6 +108,14 @@ export class App extends React.Component<{}, AppState> {
             <ExampleTabs />
           </div>
         );
+        break;
+      }
+      case "Morpheus": {
+        ELEMENT_MAP.add(unique, <Morpheus />);
+        break;
+      }
+      case "Movie": {
+        ELEMENT_MAP.add(unique, <Movie />);
         break;
       }
       case "GoogleMaps": {
@@ -204,7 +197,7 @@ export class App extends React.Component<{}, AppState> {
           zeroStateView={<MosaicZeroState createNode={() => this.nodeCreator('dummy')} />}
           // value={this.state.currentNode}
           // onChange={this.changeCurrentNode}
-          initialValue={'Morpheus'}
+          initialValue={this.initialWindows}
           // onRelease={this.onRelease}
           className={classNames('mosaic-blueprint-theme', this.state.lightTheme ? null : Classes.DARK)}
         />

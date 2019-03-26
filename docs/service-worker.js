@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mosaicrwm-sample-app1/precache-manifest.c546e04539eff26072fd6194a4e49dd4.js"
+  "/mosaicrwm-sample-app1/precache-manifest.d2c090625ec624386b0c65329e6b6f31.js"
 );
 
 workbox.clientsClaim();

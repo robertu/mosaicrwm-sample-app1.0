@@ -68,9 +68,11 @@ export const AppHeader = ({ lightTheme, themeSwitch, mosaic, nodeCreator }: Them
             <MenuItem icon="th" text="Table2" onClick={() => nodeCreator('table2')} />
             <MenuItem icon="application" text="OctaHedronInStars" onClick={() => nodeCreator('OctaHedronInStars')} />
             <MenuItem icon="application" text="GreenCube" onClick={() => nodeCreator('GreenCube')} />
+            <MenuItem icon="application" text="Morpheus" onClick={() => nodeCreator('Morpheus')} />
             <MenuItem icon="application" text="DraggableCubes A" onClick={() => nodeCreator('DraggableCubesA')} />
             <MenuItem icon="application" text="DraggableCubes B" onClick={() => nodeCreator('DraggableCubesB')} />
             <MenuItem icon="application" text="PanelStackContainer" onClick={() => nodeCreator('PanelStackContainer')} />
+            <MenuItem icon="application" text="Movie in iframe" onClick={() => nodeCreator('Movie')} />
             <MenuItem icon="map" text="Google Maps" onClick={() => nodeCreator('GoogleMaps')} />
           </Menu>
         }
