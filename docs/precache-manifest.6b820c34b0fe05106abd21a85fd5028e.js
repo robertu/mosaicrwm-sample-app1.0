@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "118261b8bbc9a0c5b85a",
+    "revision": "a27cc99fa9ff9f0ec587",
     "url": "/mosaicrwm-sample-app1/static/css/main.34d97e8a.chunk.css"
   },
   {
-    "revision": "118261b8bbc9a0c5b85a",
-    "url": "/mosaicrwm-sample-app1/static/js/main.98cb09d1.chunk.js"
+    "revision": "a27cc99fa9ff9f0ec587",
+    "url": "/mosaicrwm-sample-app1/static/js/main.9cc4ae99.chunk.js"
   },
   {
     "revision": "53d423767e585708ae70",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/mosaicrwm-sample-app1/static/media/icons-20.5502b03b.ttf"
   },
   {
-    "revision": "c0eff3c67f24c71352e1078e3871fc73",
+    "revision": "8979ccba14850e0d33b82e6f418ec728",
     "url": "/mosaicrwm-sample-app1/index.html"
   }
 ];

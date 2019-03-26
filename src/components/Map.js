@@ -38,7 +38,7 @@ class Map extends Component {
   state = {
     marker: true,
     temp: "BIzaSyCyQdVfdevsbKnczaYB3p9H_9eMnghSh6E",
-    apikey: null
+    apikey: "AIzaSyCyQdVfdevsbKnczaYB3p9H_9eMnghSh6E"
   };
 
   handleEnabledChange = () => {
@@ -82,15 +82,14 @@ class Map extends Component {
             />
           </Card>
         </div>
-        {apikey !== null && (
           <MyMapComponent
             isMarkerShown={marker}
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apikey}&amp;v=3.exp&amp;libraries=geometry,drawing`}
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?${apikey !== null ? `key=${apikey}`:""}&amp;v=3.exp&amp;libraries=geometry,drawing`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
           />
-        )}
+
       </div>
     );
   }

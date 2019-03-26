@@ -30,7 +30,7 @@ const ELEMENT_MAP = new KeyedCollection<React.ReactElement>();
 
 ELEMENT_MAP.add("Morpheus", <Morpheus />);
 ELEMENT_MAP.add("GreenCube", <GreenCube />);
-ELEMENT_MAP.add("How Linux is Built", <Movie />);
+ELEMENT_MAP.add("How Linux is Built", <Movie id="yVpbFMhOAwE" />);
 
 
 export interface AppState {
@@ -62,7 +62,7 @@ export class App extends React.Component<{}, AppState> {
     // console.log({name, path, cont: ELEMENT_MAP.contains(name)});
     return (
       <MosaicWindow<string>
-        // toolbarControls={name === 'B' ? <Button minimal={true} icon="help" /> : true}
+        additionalControls={name === "GoogleMaps1" ? [<Button minimal={true} icon={"key"} />]:null}
         statusbar={name === 'Morpheus'}
         name={name}
         statusbarControls={
@@ -77,7 +77,12 @@ export class App extends React.Component<{}, AppState> {
         // tslint:disable-next-line:no-console
         onDragEnd={(type) => console.log('MosaicWindow.onDragEnd', type)}
       >
-        {ELEMENT_MAP.contains(name) ? ELEMENT_MAP.item(name) : <H4>{name}</H4>}
+        {ELEMENT_MAP.contains(name) ? ELEMENT_MAP.item(name) : <NonIdealState
+            icon={"application"}
+            title={name}
+            description={`Sorry, but this is dummy ${name} window.`}
+            action={<a href="https://blueprintjs.com/docs/#core/components/non-ideal-state">This is me</a>}
+          />}
       </MosaicWindow>
     );
   };
@@ -115,7 +120,7 @@ export class App extends React.Component<{}, AppState> {
         break;
       }
       case "Movie": {
-        ELEMENT_MAP.add(unique, <Movie />);
+        ELEMENT_MAP.add(unique, <Movie id="M1JZBJa2fPg" />);
         break;
       }
       case "GoogleMaps": {
@@ -164,11 +169,11 @@ export class App extends React.Component<{}, AppState> {
       default:
         ELEMENT_MAP.add(unique, (
           <NonIdealState
-          icon={"application"}
-          title="sample window"
-          description={"Sorry, but this is dummy window."}
-          action={<a href="https://blueprintjs.com/docs/#core/components/non-ideal-state">This is me</a>}
-      />
+            icon={"application"}
+            title="sample window"
+            description={"Sorry, but this is dummy window."}
+            action={<a href="https://blueprintjs.com/docs/#core/components/non-ideal-state">This is me</a>}
+          />
 
         ));
     }
